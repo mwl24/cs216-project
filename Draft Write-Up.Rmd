@@ -1,0 +1,77 @@
+---
+title: "Draft Write-Up"
+author: "Michael Li"
+date: "April 12, 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(readr)
+```
+
+```{r}
+players <- read_csv("data/players.csv")
+salaries <- read_csv("data/salaries_1985to2018.csv")
+```
+
+```{r}
+colnames(players)[1] <- "player_id"
+
+teams <- salaries %>% 
+  group_by(player_id) %>% 
+  count(team) %>% 
+  mutate(years_with_team = max(n)) %>% 
+  subset(n == years_with_team) %>% 
+  slice(1) %>% 
+  select(player_id, team, years_with_team)
+
+# df of aggregate salaries
+agg_salaries <- salaries %>% 
+  group_by(player_id) %>% 
+  summarise(career_salary = sum(salary),
+            career_start = min(season_start),
+            career_end = max(season_end))
+
+agg_salaries <- agg_salaries %>% 
+  merge(teams, by = "player_id")
+```
+
+```{r, warning = F}
+df <- players %>% 
+  merge(agg_salaries, by = "player_id") %>% 
+  separate(col = birthDate, into = c("MonthDay", "birthYear"), sep = ", ") %>% 
+  separate(col = birthPlace, into = c("City", "birthPlace"), sep = ", ") %>% 
+  separate(col = draft_pick, into = c("draft_pick", "overall"), sep = "th") %>% 
+  separate(col = height, into = c("feet", "inches"), sep = "-") %>% 
+  mutate(height = as.double(feet) * 12 + as.double(inches)) %>% 
+  separate(col = position, into = c("primary_pos", "secondary_pos", "tertiary_pos", "quarternary_pos"),
+           sep = " and ") %>% 
+  mutate(num_positions = if_else(is.na(primary_pos), 0, 1) +
+           if_else(is.na(secondary_pos), 0, 1) +
+           if_else(is.na(tertiary_pos), 0 , 1) +
+           if_else(is.na(quarternary_pos), 0, 1)) %>% 
+  separate(col = weight, into = c("weight", "metric"), sep = "l") %>% 
+  select(-c(MonthDay, City, overall, draft_round, feet, inches, metric))
+
+#df$birthYear <- as.Date(df$birthYear, "%Y")
+df$`career_FG%` <- as.double(df$`career_FG%`)
+df$`career_FG3%` <- as.double(df$`career_FG3%`)
+df$`career_FT%` <- as.double(df$`career_FT%`)
+df$career_TRB <- as.double(df$career_TRB)
+df$draft_year <- as.double(df$draft_year)
+df$weight <- as.double(df$weight)
+#df$career_start <- as.Date(as.character(df$career_start), "%Y")
+#df$career_end <- as.Date(as.character(df$career_end), "%Y")
+```
+
+
+
+
+
+
