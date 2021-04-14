@@ -2,7 +2,9 @@
 title: "Draft Write-Up"
 author: "Michael Li"
 date: "April 12, 2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -13,6 +15,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(tidyverse)
 library(readr)
+library(kableExtra)
+library(broom)
 ```
 
 ```{r}
@@ -47,7 +51,7 @@ df <- players %>%
   merge(agg_salaries, by = "player_id") %>% 
   separate(col = birthDate, into = c("MonthDay", "birthYear"), sep = ", ") %>% 
   separate(col = birthPlace, into = c("City", "birthPlace"), sep = ", ") %>% 
-  separate(col = draft_pick, into = c("draft_pick", "overall"), sep = "th") %>% 
+  separate(col = draft_pick, into = c("draft_pick", "overall"), sep = "[thrdndst]") %>% 
   separate(col = height, into = c("feet", "inches"), sep = "-") %>% 
   mutate(height = as.double(feet) * 12 + as.double(inches)) %>% 
   separate(col = position, into = c("primary_pos", "secondary_pos", "tertiary_pos", "quarternary_pos"),
@@ -57,18 +61,85 @@ df <- players %>%
            if_else(is.na(tertiary_pos), 0 , 1) +
            if_else(is.na(quarternary_pos), 0, 1)) %>% 
   separate(col = weight, into = c("weight", "metric"), sep = "l") %>% 
-  select(-c(MonthDay, City, overall, draft_round, feet, inches, metric))
+  select(-c(MonthDay, City, overall, draft_round, feet, inches, metric)) %>% 
+  mutate(years_played = career_end - career_start) %>% 
+  mutate(averageWS = career_WS / years_played)
 
 #df$birthYear <- as.Date(df$birthYear, "%Y")
 df$`career_FG%` <- as.double(df$`career_FG%`)
 df$`career_FG3%` <- as.double(df$`career_FG3%`)
 df$`career_FT%` <- as.double(df$`career_FT%`)
 df$career_TRB <- as.double(df$career_TRB)
+df$`career_eFG%` <- as.double(df$`career_eFG%`)
 df$draft_year <- as.double(df$draft_year)
 df$weight <- as.double(df$weight)
+df$career_PER <- as.double(df$career_PER)
+df$draft_pick <- as.integer(df$draft_pick)
 #df$career_start <- as.Date(as.character(df$career_start), "%Y")
 #df$career_end <- as.Date(as.character(df$career_end), "%Y")
+df <- df %>% 
+  mutate(average_salary  = (career_salary / years_played)/1000000) # salary in millions
 ```
+
+# Linear Model
+```{r}
+lm_sal <- lm(average_salary ~ career_AST + 
+             + `career_G` + `career_PER` + career_PTS + career_TRB + averageWS + 
+               `career_eFG%` + draft_pick + primary_pos +
+               num_positions + draft_year, 
+             data  = df)
+summary(lm_sal)
+lm_sal_out <- tidy(lm_sal, conf.int = TRUE)
+lm_sal_out$term <- c(
+  "(Intercept)",
+  "APG", "CareerGames", "PER", "PPG", "RPG", 
+  "WinShares", "eFGPercentage", "Draft Pick", "PrimaryPositionPG", "PrimaryPositionPF",
+  "PrimaryPositionSG", "PrimaryPositionSF", "NumberOfPositions", "DraftYear"
+)
+knitr::kable(lm_sal_out, digits = 3, caption = "Average Salary OLS Model Output", col.names = c('Term','Estimate', 'Standard Error', 'Statistic', 'P-Value', 'CI (low)', 'CI (high)')) %>% 
+  kable_styling(latex_options = "HOLD_position")
+car::vif(lm_sal)
+```
+
+```{r}
+lm_ws <- lm(averageWS ~ career_AST + 
+             + `career_G` + `career_PER` + career_PTS + career_TRB + 
+               `career_eFG%` + draft_pick + primary_pos +
+               num_positions + draft_year, 
+             data  = df)
+summary(lm_ws)
+lm_ws_out <- tidy(lm_ws, conf.int = TRUE)
+lm_ws_out$term <- c(
+  "(Intercept)",
+  "APG", "CareerGames", "PER", "PPG", "RPG", 
+  "eFGPercentage", "Draft Pick", "PrimaryPositionPG", "PrimaryPositionPF",
+  "PrimaryPositionSG", "PrimaryPositionSF", "NumberOfPositions", "DraftYear"
+)
+knitr::kable(lm_ws_out, digits = 3, caption = "Average Win Shares OLS Model Output", col.names = c('Term','Estimate', 'Standard Error', 'Statistic', 'P-Value', 'CI (low)', 'CI (high)')) %>% 
+  kable_styling(latex_options = "HOLD_position")
+car::vif(lm_sal)
+```
+```{r}
+temp_lm <- tibble(res = lm_sal$residuals, 
+               fitted = lm_sal$fitted.values)
+ggplot(data = temp_lm, aes(x = fitted, y = res)) + 
+  geom_point() + 
+  labs(x = "Fitted values", y = "Residuals",
+       title = "Salary Model: Highly non-constant variance") +
+  geom_hline(yintercept = 0, color = "red")
+```
+
+```{r}
+temp_ws <- tibble(res = lm_ws$residuals, 
+               fitted = lm_ws$fitted.values)
+ggplot(data = temp_ws, aes(x = fitted, y = res)) + 
+  geom_point() + 
+  labs(x = "Fitted values", y = "Residuals",
+       title = "Salary Model: Highly non-constant variance") +
+  geom_hline(yintercept = 0, color = "red")
+```
+
+
 
 
 
