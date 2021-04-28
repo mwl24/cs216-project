@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  13 APR 2021 23:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  28 APR 2021 02:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -836,209 +836,454 @@ File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 Package xcolor Warning: Incompatible color definition on input line 171.
 
 
-Package xcolor Warning: Incompatible color definition on input line 175.
-
-
-Package xcolor Warning: Incompatible color definition on input line 175.
+Package xcolor Warning: Incompatible color definition on input line 177.
 
 
 Package xcolor Warning: Incompatible color definition on input line 177.
 
 
-Package xcolor Warning: Incompatible color definition on input line 181.
+Package xcolor Warning: Incompatible color definition on input line 202.
 
 
-Package xcolor Warning: Incompatible color definition on input line 181.
+Package xcolor Warning: Incompatible color definition on input line 206.
 
 
-Package xcolor Warning: Incompatible color definition on input line 203.
-
-
-Package xcolor Warning: Incompatible color definition on input line 207.
-
-
-Package xcolor Warning: Incompatible color definition on input line 207.
+Package xcolor Warning: Incompatible color definition on input line 206.
 
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
-Package xcolor Warning: Incompatible color definition on input line 223.
+Package xcolor Warning: Incompatible color definition on input line 238.
 
 
-Package xcolor Warning: Incompatible color definition on input line 245.
+Package xcolor Warning: Incompatible color definition on input line 242.
 
 
-Package xcolor Warning: Incompatible color definition on input line 245.
+Package xcolor Warning: Incompatible color definition on input line 242.
 
 
-Package xcolor Warning: Incompatible color definition on input line 247.
+Package xcolor Warning: Incompatible color definition on input line 264.
 
 
-Package xcolor Warning: Incompatible color definition on input line 282.
+Package xcolor Warning: Incompatible color definition on input line 268.
 
 
-Package xcolor Warning: Incompatible color definition on input line 282.
+Package xcolor Warning: Incompatible color definition on input line 268.
 
 
-Underfull \vbox (badness 10000) detected at line 282
- []
+Package xcolor Warning: Incompatible color definition on input line 284.
 
 
-Overfull \vbox (1.2532pt too high) detected at line 282
- []
+Package xcolor Warning: Incompatible color definition on input line 288.
 
 
-Package xcolor Warning: Incompatible color definition on input line 282.
+Package xcolor Warning: Incompatible color definition on input line 288.
+
+
+Package xcolor Warning: Incompatible color definition on input line 290.
+
+
+Package xcolor Warning: Incompatible color definition on input line 312.
+
+
+Package xcolor Warning: Incompatible color definition on input line 312.
+
+
+Package xcolor Warning: Incompatible color definition on input line 312.
 
 [2]
 
-Package xcolor Warning: Incompatible color definition on input line 282.
+Package xcolor Warning: Incompatible color definition on input line 312.
 
 
-Package xcolor Warning: Incompatible color definition on input line 282.
+Package xcolor Warning: Incompatible color definition on input line 312.
 
 
-Package xcolor Warning: Incompatible color definition on input line 286.
+Package xcolor Warning: Incompatible color definition on input line 314.
 
 
-Package xcolor Warning: Incompatible color definition on input line 295.
+Package xcolor Warning: Incompatible color definition on input line 351.
 
 
-Package xcolor Warning: Incompatible color definition on input line 295.
+Package xcolor Warning: Incompatible color definition on input line 351.
+
+
+Package xcolor Warning: Incompatible color definition on input line 353.
+
+
+Package xcolor Warning: Incompatible color definition on input line 363.
+
+
+Package xcolor Warning: Incompatible color definition on input line 363.
+
+
+Package xcolor Warning: Incompatible color definition on input line 365.
+
+
+Package xcolor Warning: Incompatible color definition on input line 378.
+
+
+Package xcolor Warning: Incompatible color definition on input line 378.
+
+
+Underfull \vbox (badness 10000) detected at line 378
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 378.
 
 [3]
 
-Package xcolor Warning: Incompatible color definition on input line 334.
+Package xcolor Warning: Incompatible color definition on input line 378.
 
 
-Package xcolor Warning: Incompatible color definition on input line 346.
+Package xcolor Warning: Incompatible color definition on input line 378.
 
 
-Package xcolor Warning: Incompatible color definition on input line 346.
-
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 352.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 352.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 352.
-
-Package xcolor Warning: Incompatible color definition on input line 389.
+Package xcolor Warning: Incompatible color definition on input line 382.
 
 
-Package xcolor Warning: Incompatible color definition on input line 393.
+Package xcolor Warning: Incompatible color definition on input line 418.
 
 
-Package xcolor Warning: Incompatible color definition on input line 393.
+Package xcolor Warning: Incompatible color definition on input line 418.
 
 
-Package xcolor Warning: Incompatible color definition on input line 410.
+Package xcolor Warning: Incompatible color definition on input line 420.
 
 
-Package xcolor Warning: Incompatible color definition on input line 419.
+Package xcolor Warning: Incompatible color definition on input line 456.
 
 
-Package xcolor Warning: Incompatible color definition on input line 419.
-
-[4pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
-as been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.455 \end{verbatim}
-                    ]
-
-Package xcolor Warning: Incompatible color definition on input line 457.
+Package xcolor Warning: Incompatible color definition on input line 456.
 
 
-Package xcolor Warning: Incompatible color definition on input line 469.
+Package xcolor Warning: Incompatible color definition on input line 456.
+
+[4]
+
+Package xcolor Warning: Incompatible color definition on input line 456.
 
 
-Package xcolor Warning: Incompatible color definition on input line 469.
+Package xcolor Warning: Incompatible color definition on input line 456.
+
+
+Package xcolor Warning: Incompatible color definition on input line 458.
+
+
+Package xcolor Warning: Incompatible color definition on input line 468.
+
+
+Package xcolor Warning: Incompatible color definition on input line 468.
+
+
+Package xcolor Warning: Incompatible color definition on input line 470.
+
+
+Package xcolor Warning: Incompatible color definition on input line 481.
+
+
+Package xcolor Warning: Incompatible color definition on input line 481.
+
+
+Package xcolor Warning: Incompatible color definition on input line 486.
+
+
+Package xcolor Warning: Incompatible color definition on input line 493.
+
+
+Package xcolor Warning: Incompatible color definition on input line 493.
+
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-11-1.pdf, id=38, 463.7325pt x 
+316.18124pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-11-1.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-11-1.p
+df  used on input line 495.
+(pdftex.def)             Requested size: 463.73842pt x 316.18529pt.
+
+Package xcolor Warning: Incompatible color definition on input line 497.
 
 [5]
 
-Package xcolor Warning: Incompatible color definition on input line 510.
+Package xcolor Warning: Incompatible color definition on input line 504.
 
 
-Package xcolor Warning: Incompatible color definition on input line 514.
+Package xcolor Warning: Incompatible color definition on input line 504.
+
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-12-1.pdf, id=43, 463.7325pt x 
+316.18124pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-12-1.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-12-1.p
+df  used on input line 510.
+(pdftex.def)             Requested size: 463.73842pt x 316.18529pt.
+
+Package xcolor Warning: Incompatible color definition on input line 512.
+
+[6 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-11-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 519.
 
 
-Package xcolor Warning: Incompatible color definition on input line 514.
+Package xcolor Warning: Incompatible color definition on input line 519.
+
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-13-1.pdf, id=55, 463.7325pt x 
+316.18124pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-13-1.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-13-1.p
+df  used on input line 521.
+(pdftex.def)             Requested size: 463.73842pt x 316.18529pt.
+
+Package xcolor Warning: Incompatible color definition on input line 523.
+
+[7 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-12-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 530.
 
 
-Package xcolor Warning: Incompatible color definition on input line 531.
+Package xcolor Warning: Incompatible color definition on input line 530.
 
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-14-1.pdf, id=68, 457.71pt x 31
+6.18124pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-14-1.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-14-1.p
+df  used on input line 532.
+(pdftex.def)             Requested size: 457.72984pt x 316.19493pt.
+
+Package xcolor Warning: Incompatible color definition on input line 534.
+
+[8 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-13-1.pdf>]
 
 Package xcolor Warning: Incompatible color definition on input line 541.
 
 
 Package xcolor Warning: Incompatible color definition on input line 541.
 
-<Draft-Write-Up_files/figure-latex/unnamed-chunk-7-1.pdf, id=38, 459.7175pt x 3
-16.18124pt>
-File: Draft-Write-Up_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (typ
-e pdf)
-<use Draft-Write-Up_files/figure-latex/unnamed-chunk-7-1.pdf>
-Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-7-1.pd
-f  used on input line 543.
-(pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-15-1.pdf, id=80, 463.7325pt x 
+316.18124pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-15-1.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-15-1.p
+df  used on input line 543.
+(pdftex.def)             Requested size: 463.73842pt x 316.18529pt.
 
 Package xcolor Warning: Incompatible color definition on input line 545.
 
-[6pdfTeX warning (ext4): destination with the same identifier (name{table.2}) h
-as been already used, duplicate ignored
+[9 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-14-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 552.
+
+
+Package xcolor Warning: Incompatible color definition on input line 552.
+
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-16-1.pdf, id=93, 463.7325pt x 
+316.18124pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-16-1.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-16-1.p
+df  used on input line 558.
+(pdftex.def)             Requested size: 463.73842pt x 316.18529pt.
+
+Package xcolor Warning: Incompatible color definition on input line 560.
+
+[10 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-15-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 568.
+
+
+Package xcolor Warning: Incompatible color definition on input line 568.
+
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-17-1.pdf, id=105, 459.7175pt x
+ 315.1775pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-17-1.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-17-1.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-17-1.p
+df  used on input line 574.
+(pdftex.def)             Requested size: 459.74442pt x 315.19595pt.
+
+Package xcolor Warning: Incompatible color definition on input line 576.
+
+[11 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-16-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 588.
+
+
+Package xcolor Warning: Incompatible color definition on input line 588.
+
+
+Package xcolor Warning: Incompatible color definition on input line 590.
+
+
+Package xcolor Warning: Incompatible color definition on input line 623.
+
+
+Package xcolor Warning: Incompatible color definition on input line 623.
+
+
+Underfull \vbox (badness 10000) detected at line 623
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 623.
+
+[12 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-17-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 623.
+
+
+Package xcolor Warning: Incompatible color definition on input line 623.
+
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 629.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 629.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 629.
+
+Package xcolor Warning: Incompatible color definition on input line 698.
+
+
+Package xcolor Warning: Incompatible color definition on input line 702.
+
+
+Package xcolor Warning: Incompatible color definition on input line 702.
+
+[13pdfTeX warning (ext4): destination with the same identifier (name{table.1}) 
+has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.545 \begin{Shaded}
+l.784 \end{verbatim}
+                    ] [14]
+
+Package xcolor Warning: Incompatible color definition on input line 786.
+
+
+Package xcolor Warning: Incompatible color definition on input line 818.
+
+
+Package xcolor Warning: Incompatible color definition on input line 818.
+
+[15]
+
+Package xcolor Warning: Incompatible color definition on input line 887.
+
+
+Package xcolor Warning: Incompatible color definition on input line 897.
+
+
+Package xcolor Warning: Incompatible color definition on input line 897.
+
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-21-1.pdf, id=142, 459.7175pt x
+ 316.18124pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-21-1.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-21-1.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-21-1.p
+df  used on input line 899.
+(pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
+
+Package xcolor Warning: Incompatible color definition on input line 901.
+
+[16pdfTeX warning (ext4): destination with the same identifier (name{table.2}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.901 \begin{Shaded}
                     ]
 
-Package xcolor Warning: Incompatible color definition on input line 555.
+Package xcolor Warning: Incompatible color definition on input line 911.
 
 
-Package xcolor Warning: Incompatible color definition on input line 555.
+Package xcolor Warning: Incompatible color definition on input line 911.
 
-<Draft-Write-Up_files/figure-latex/unnamed-chunk-8-1.pdf, id=44, 459.7175pt x 3
-16.18124pt>
-File: Draft-Write-Up_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (typ
-e pdf)
-<use Draft-Write-Up_files/figure-latex/unnamed-chunk-8-1.pdf>
-Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-8-1.pd
-f  used on input line 557.
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-21-2.pdf, id=148, 459.7175pt x
+ 316.18124pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-21-2.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-21-2.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-21-2.p
+df  used on input line 913.
 (pdftex.def)             Requested size: 459.74442pt x 316.19975pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 559.
-[7 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-7-1.pdf>] [8 <./Draft-Wri
-te-Up_files/figure-latex/unnamed-chunk-8-1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 559.
+
+Package xcolor Warning: Incompatible color definition on input line 915.
+
+[17 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-21-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 931.
+
+
+Package xcolor Warning: Incompatible color definition on input line 931.
+
+<Draft-Write-Up_files/figure-latex/unnamed-chunk-21-3.pdf, id=161, 463.7325pt x
+ 316.18124pt>
+File: Draft-Write-Up_files/figure-latex/unnamed-chunk-21-3.pdf Graphic file (ty
+pe pdf)
+<use Draft-Write-Up_files/figure-latex/unnamed-chunk-21-3.pdf>
+Package pdftex.def Info: Draft-Write-Up_files/figure-latex/unnamed-chunk-21-3.p
+df  used on input line 937.
+(pdftex.def)             Requested size: 463.73842pt x 316.18529pt.
+
+Package xcolor Warning: Incompatible color definition on input line 939.
+
+[18 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-21-2.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 948.
+
+
+Package xcolor Warning: Incompatible color definition on input line 948.
+
+[19 <./Draft-Write-Up_files/figure-latex/unnamed-chunk-21-3.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 997.
+[20]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 997.
 (./Draft-Write-Up.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 559.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 559.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 997.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 997.
 Package rerunfilecheck Info: File `Draft-Write-Up.out' has not changed.
-(rerunfilecheck)             Checksum: A06C1AC2A0746A136F0AEC264E508334;107.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 559.
+(rerunfilecheck)             Checksum: 258F4F5CE16395C9FFF422780C8B6CA9;330.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 997.
  ) 
 Here is how much of TeX's memory you used:
- 14343 strings out of 492649
- 208745 string characters out of 6129622
- 336554 words of memory out of 5000000
- 17960 multiletter control sequences out of 15000+600000
- 45912 words of font info for 66 fonts, out of 8000000 for 9000
+ 14399 strings out of 492649
+ 211196 string characters out of 6129622
+ 345082 words of memory out of 5000000
+ 18000 multiletter control sequences out of 15000+600000
+ 52192 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 34i,9n,38p,596b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
-texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}</usr/local/texlive/2018/
-texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2018/texmf-dist
-/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
-1/public/lm/lmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm
-/lmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtk10.pfb
-></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/loc
-al/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on Draft-Write-Up.pdf (8 pages, 416968 bytes).
+ 34i,16n,38p,1020b,455s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/lo
+cal/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texliv
+e/2018/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2018/texmf-d
+ist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2018/texmf-dist/fonts/
+enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/
+lm-ec.enc}</usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmbx12.pfb>
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/loca
+l/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/
+2018/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2018/texmf-
+dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/
+type1/public/lm/lmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publi
+c/lm/lmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmr7.p
+fb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/l
+ocal/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></usr/local/texli
+ve/2018/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2018/te
+xmf-dist/fonts/type1/public/lm/lmtti10.pfb>
+Output written on Draft-Write-Up.pdf (20 pages, 1422846 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 76 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
- 10259 words of extra memory for PDF output out of 12000 (max. 10000000)
+ 251 PDF objects out of 1000 (max. 8388607)
+ 184 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 10307 words of extra memory for PDF output out of 12000 (max. 10000000)
 

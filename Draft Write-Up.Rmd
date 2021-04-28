@@ -17,11 +17,15 @@ library(tidyverse)
 library(readr)
 library(kableExtra)
 library(broom)
+library(readxl)
+library(gam)
+library(mgcv)
 ```
 
 ```{r}
 players <- read_csv("data/players.csv")
 salaries <- read_csv("data/salaries_1985to2018.csv")
+salary_cap <- read_excel("data/salarycap.xlsx", col_names = c("season", "SalaryCap", "SalaryCap2019"))
 ```
 
 ```{r}
@@ -78,71 +82,347 @@ df$draft_pick <- as.integer(df$draft_pick)
 #df$career_start <- as.Date(as.character(df$career_start), "%Y")
 #df$career_end <- as.Date(as.character(df$career_end), "%Y")
 df <- df %>% 
-  mutate(average_salary  = (career_salary / years_played)/1000000) # salary in millions
+  mutate(average_salary  = (career_salary / years_played)/1000000) 
+# %>%  # salary in millions
+#   mutate(stand_salary = (average_salary - mean(average_salary, na.rm = TRUE)) / sd(average_salary, na.rm = TRUE))
+```
+
+```{r}
+salary_cap_final <- salary_cap %>% 
+  separate(season, into = c("start", "end"), sep = "-")
+salary_cap_final$start <- as.double(salary_cap_final$start)
+salary_cap_final <- salary_cap_final %>% 
+  filter(start <= 2017) %>% 
+  mutate(SalaryCap = SalaryCap / 1000000) %>% 
+  select(start, SalaryCap)
+```
+
+```{r}
+avg_cap_finder <- function(start_year, end_year) {
+  rel_cap <- salary_cap_final %>% 
+    filter(start >= start_year & start <= end_year - 1) %>% 
+    summarise(avg_cap = mean(SalaryCap))
+  return(rel_cap$avg_cap[1])
+}
+avg_cap_finder <- Vectorize(avg_cap_finder)
+df_final <- df %>% 
+  mutate(avg_cap = avg_cap_finder(career_start, career_end)) %>% 
+  mutate(sal_rel = (average_salary / avg_cap) * 100)
 ```
 
 # Linear Model
 ```{r}
-lm_sal <- lm(average_salary ~ career_AST + 
-             + `career_G` + `career_PER` + career_PTS + career_TRB + averageWS + 
-               `career_eFG%` + draft_pick + primary_pos +
-               num_positions + draft_year, 
-             data  = df)
-summary(lm_sal)
-lm_sal_out <- tidy(lm_sal, conf.int = TRUE)
-lm_sal_out$term <- c(
-  "(Intercept)",
-  "APG", "CareerGames", "PER", "PPG", "RPG", 
-  "WinShares", "eFGPercentage", "Draft Pick", "PrimaryPositionPG", "PrimaryPositionPF",
-  "PrimaryPositionSG", "PrimaryPositionSF", "NumberOfPositions", "DraftYear"
-)
-knitr::kable(lm_sal_out, digits = 3, caption = "Average Salary OLS Model Output", col.names = c('Term','Estimate', 'Standard Error', 'Statistic', 'P-Value', 'CI (low)', 'CI (high)')) %>% 
-  kable_styling(latex_options = "HOLD_position")
-car::vif(lm_sal)
+# lm_sal <- lm(sal_rel ~ career_AST + 
+#              + `career_G` + `career_PER` + career_PTS + career_TRB + averageWS + 
+#                `career_eFG%` + draft_pick + primary_pos +
+#                num_positions + draft_year, 
+#              data  = df_final)
+# 
+# lm_sal_out <- tidy(lm_sal, conf.int = TRUE)
+# 
+# lm_sal_out$term <- c(
+#   "(Intercept)",
+#   "APG", "Career Games", "PER", "PPG", "RPG", 
+#   "Win Shares", "eFG Percentage", "Draft Pick", "Primary Position = PG", "Primary Position = PF",
+#   "Primary Position = SG", "Primary Position = SF", "Number of Positions", "Draft Year"
+# )
+# 
+# lm_sal_out <- lm_sal_out %>%
+#   mutate(p_value = case_when(
+#     p.value < 0.001 ~ "<0.001",
+#     TRUE ~ as.character(round(p.value, digits = 3))
+#   ))
+# 
+# lm_sal_out <- lm_sal_out %>%
+#   mutate(std.error = case_when(
+#     std.error < 0.001 ~ "<0.001",
+#     TRUE ~ as.character(round(std.error, digits = 3))
+#   ))
+# 
+# lm_sal_out <- lm_sal_out %>%
+#   dplyr::select(term, estimate, std.error, statistic, p_value, conf.low, conf.high)
+# 
+# knitr::kable(lm_sal_out, digits = 3, caption = "Average Standardized Salary OLS Model Output", col.names = c('Term','Estimate', 'Standard Error', 'Statistic', 'P-Value', 'CI (low)', 'CI (high)')) %>% 
+#   kable_styling(latex_options = "HOLD_position")
+# car::vif(lm_sal)
 ```
 
 ```{r}
-lm_ws <- lm(averageWS ~ career_AST + 
-             + `career_G` + `career_PER` + career_PTS + career_TRB + 
-               `career_eFG%` + draft_pick + primary_pos +
-               num_positions + draft_year, 
-             data  = df)
-summary(lm_ws)
-lm_ws_out <- tidy(lm_ws, conf.int = TRUE)
-lm_ws_out$term <- c(
-  "(Intercept)",
-  "APG", "CareerGames", "PER", "PPG", "RPG", 
-  "eFGPercentage", "Draft Pick", "PrimaryPositionPG", "PrimaryPositionPF",
-  "PrimaryPositionSG", "PrimaryPositionSF", "NumberOfPositions", "DraftYear"
-)
-knitr::kable(lm_ws_out, digits = 3, caption = "Average Win Shares OLS Model Output", col.names = c('Term','Estimate', 'Standard Error', 'Statistic', 'P-Value', 'CI (low)', 'CI (high)')) %>% 
-  kable_styling(latex_options = "HOLD_position")
-car::vif(lm_sal)
+# lm_ws <- lm(averageWS ~ career_AST + 
+#              + `career_G` + `career_PER` + career_PTS + career_TRB + 
+#                `career_eFG%` + draft_pick + primary_pos +
+#                num_positions + draft_year, 
+#              data  = df_final)
+# 
+# lm_ws_out <- tidy(lm_ws, conf.int = TRUE)
+# 
+# lm_ws_out$term <- c(
+#   "(Intercept)",
+#   "APG", "Career Games", "PER", "PPG", "RPG", 
+#   "eFG Percentage", "Draft Pick", "Primary Position = PG", "Primary Position = PF",
+#   "Primary Position = SG", "Primary Position = SF", "Number Of Positions", "Draft Year"
+# )
+# 
+# lm_ws_out <- lm_ws_out %>%
+#   mutate(p_value = case_when(
+#     p.value < 0.001 ~ "<0.001",
+#     TRUE ~ as.character(round(p.value, digits = 3))
+#   ))
+# 
+# lm_ws_out <- lm_ws_out %>%
+#   mutate(std.error = case_when(
+#     std.error < 0.001 ~ "<0.001",
+#     TRUE ~ as.character(round(std.error, digits = 3))
+#   ))
+# 
+# lm_ws_out <- lm_ws_out %>%
+#   dplyr::select(term, estimate, std.error, statistic, p_value, conf.low, conf.high)
+# 
+# knitr::kable(lm_ws_out, digits = 3, caption = "Average Win Shares OLS Model Output", col.names = c('Term','Estimate', 'Standard Error', 'Statistic', 'P-Value', 'CI (low)', 'CI (high)')) %>% 
+#   kable_styling(latex_options = "HOLD_position")
+# car::vif(lm_sal)
 ```
+
 ```{r}
-temp_lm <- tibble(res = lm_sal$residuals, 
-               fitted = lm_sal$fitted.values)
-ggplot(data = temp_lm, aes(x = fitted, y = res)) + 
+# temp_lm <- tibble(res = lm_sal$residuals, 
+#                fitted = lm_sal$fitted.values)
+# ggplot(data = temp_lm, aes(x = fitted, y = res)) + 
+#   geom_point() + 
+#   labs(x = "Fitted values", y = "Residuals",
+#        title = "Salary Model: Highly non-constant variance") +
+#   geom_hline(yintercept = 0, color = "red")
+```
+
+```{r}
+# temp_ws <- tibble(res = lm_ws$residuals, 
+#                fitted = lm_ws$fitted.values)
+# ggplot(data = temp_ws, aes(x = fitted, y = res)) + 
+#   geom_point() + 
+#   labs(x = "Fitted values", y = "Residuals",
+#        title = "Win Shares Model: Highly non-constant variance") +
+#   geom_hline(yintercept = 0, color = "red") +
+#   ylim(c(-10, 75))
+```
+
+# EDA to investigate non-linearities
+
+```{r}
+ggplot(data = df_final, aes(x = career_AST, y = sal_rel)) + 
+  geom_point() + 
+  labs(x = "Career Assists Per Game", y = "Average Salary",
+       title = "Weakly Linear")
+```
+
+```{r}
+ggplot(data = df_final, aes(x = career_PER, y = sal_rel)) + 
+  geom_point() + 
+  labs(x = "Career Assists Per Game", y = "Average Salary",
+       title = "Weakly Linear")
+```
+
+```{r}
+ggplot(data = df_final, aes(x = career_TRB, y = sal_rel)) + 
+  geom_point() + 
+  labs(x = "Career Assists Per Game", y = "Average Salary",
+       title = "Weakly Linear")
+```
+
+```{r}
+ggplot(data = df, aes(x = career_PTS, y = average_salary, colour = draft_year)) + 
+  geom_point() + 
+  labs(x = "Career Points Per Game", y = "Average Salary",
+       title = "Weakly Linear")
+```
+
+
+```{r}
+ggplot(data = df_final, aes(x = career_G, y = sal_rel)) + 
+  geom_point() + 
+  labs(x = "Career Points Per Game", y = "Average Salary",
+       title = "Weakly Linear")
+```
+
+```{r}
+ggplot(data = df_final, aes(x = `career_eFG%`, y = sal_rel)) + 
+  geom_point() + 
+  labs(x = "Career Points Per Game", y = "Average Salary",
+       title = "Weakly Linear")
+```
+
+
+```{r}
+draft_year_sals <- df %>% 
+  group_by(draft_year) %>% 
+  mutate(year_sals_avg = mean(average_salary))
+ggplot(data = draft_year_sals, aes(x = draft_year, y = year_sals_avg)) + 
+  geom_line(color = "#00AFBB", size = 2)
+```
+
+```{r}
+gam_sal <- lm(sal_rel ~ bs(career_AST, df = 3, degree = 1) + 
+             + bs(`career_G`, df = 3, degree = 1) + bs(`career_PER`, df = 3, degree = 1) + bs(career_PTS, df = 3, degree = 1) + bs(career_TRB, df = 3, degree = 1) + bs(averageWS, df = 3, degree = 1) + 
+               bs(`career_eFG%`, df = 3, degree = 1) + bs(draft_pick, knots = c(14, 30), degree = 1) + primary_pos +
+               num_positions + draft_year, data = df_final)
+
+gam_ws <- lm(averageWS ~ bs(career_AST, df = 3, degree = 1) + 
+             + bs(`career_G`, df = 3, degree = 1) + bs(`career_PER`, df = 3, degree = 1) + bs(career_PTS, df = 3, degree = 1) + bs(career_TRB, df = 3, degree = 1) +
+               bs(`career_eFG%`, df = 3, degree = 1) + bs(draft_pick, knots = c(14, 30), degree = 1) + primary_pos +
+               num_positions + draft_year, data = df_final)
+```
+
+```{r}
+gam_sal_out <- tidy(gam_sal, conf.int = TRUE)
+gam_sal_out$term <- c(
+  "(Intercept)",
+  "APG (B)", "APG (M)", "APG (T)", "Games Played (B)", "Games Played (M)",
+  "Games Played (T)", "PER (B)", "PER (M)", "PER (T)", "PPG (B)", "PPG (M)",
+  "PPG (T)", "RPG (B)", "RPG (M)", "RPG (T)", "Average Win Shares (B)", 
+  "Average Win Shares (M)", "Average Win Shares (T)", "Career eFG (B)",
+  "Career eFG (M)", "Career eFG (T)", "Draft Pick (Lottery)", "Draft Pick (Late 1st)", 
+  "Draft Pick (2nd Round)", "Primary Position = PG", "Primary Position = PF", 
+  "Primary Position = SG", "Primary Position = SF", "Number of Positions", 
+  "Draft Year"
+)
+
+gam_sal_out <- gam_sal_out %>%
+  mutate(p_value = case_when(
+    p.value < 0.001 ~ "<0.001",
+    TRUE ~ as.character(round(p.value, digits = 3))
+  ))
+
+gam_sal_out <- gam_sal_out %>%
+  mutate(std.error = case_when(
+    std.error < 0.001 ~ "<0.001",
+    TRUE ~ as.character(round(std.error, digits = 3))
+  ))
+
+gam_sal_out <- gam_sal_out %>%
+  dplyr::select(term, estimate, std.error, statistic, p_value, conf.low, conf.high)
+
+knitr::kable(gam_sal_out, digits = 3, caption = "Relative Salary Score GAM Model Output", col.names = c('Term','Estimate', 'Standard Error', 'Statistic', 'P-Value', 'CI (low)', 'CI (high)')) %>% 
+  kable_styling(latex_options = "HOLD_position")
+summary(gam_ws)
+```
+
+```{r}
+gam_ws_out <- tidy(gam_ws, conf.int = TRUE)
+gam_ws_out$term <- c(
+  "(Intercept)",
+  "APG (B)", "APG (M)", "APG (T)", "Games Played (B)", "Games Played (M)",
+  "Games Played (T)", "PER (B)", "PER (M)", "PER (T)", "PPG (B)", "PPG (M)",
+  "PPG (T)", "RPG (B)", "RPG (M)", "RPG (T)", "Career eFG (B)",
+  "Career eFG (M)", "Career eFG (T)", "Draft Pick (Lottery)", "Draft Pick (Late 1st)", 
+  "Draft Pick (2nd Round)", "Primary Position = PG", "Primary Position = PF", 
+  "Primary Position = SG", "Primary Position = SF", "Number of Positions", 
+  "Draft Year"
+)
+
+gam_ws_out <- gam_ws_out %>%
+  mutate(p_value = case_when(
+    p.value < 0.001 ~ "<0.001",
+    TRUE ~ as.character(round(p.value, digits = 3))
+  ))
+
+gam_ws_out <- gam_ws_out %>%
+  mutate(std.error = case_when(
+    std.error < 0.001 ~ "<0.001",
+    TRUE ~ as.character(round(std.error, digits = 3))
+  ))
+
+gam_ws_out <- gam_ws_out %>%
+  dplyr::select(term, estimate, std.error, statistic, p_value, conf.low, conf.high)
+
+knitr::kable(gam_ws_out, digits = 3, caption = "Average Win Shares GAM Model Output", col.names = c('Term','Estimate', 'Standard Error', 'Statistic', 'P-Value', 'CI (low)', 'CI (high)')) %>% 
+  kable_styling(latex_options = "HOLD_position")
+```
+
+```{r}
+temp_gam_sal <- tibble(res = gam_sal$residuals, 
+               fitted = gam_sal$fitted.values)
+ggplot(data = temp_gam_sal, aes(x = fitted, y = res)) + 
   geom_point() + 
   labs(x = "Fitted values", y = "Residuals",
        title = "Salary Model: Highly non-constant variance") +
   geom_hline(yintercept = 0, color = "red")
-```
 
-```{r}
-temp_ws <- tibble(res = lm_ws$residuals, 
-               fitted = lm_ws$fitted.values)
-ggplot(data = temp_ws, aes(x = fitted, y = res)) + 
+temp_gam_ws <- tibble(res = gam_ws$residuals, 
+               fitted = gam_ws$fitted.values)
+ggplot(data = temp_gam_ws, aes(x = fitted, y = res)) + 
   geom_point() + 
   labs(x = "Fitted values", y = "Residuals",
        title = "Salary Model: Highly non-constant variance") +
   geom_hline(yintercept = 0, color = "red")
+
+# get rows with non NA WS values
+nonNA_WS <- row.names(model.frame(gam_sal))
+df_ws <- df_final[nonNA_WS,]
+
+temp_gam_sal_ws <- tibble(ws = df_ws$averageWS, 
+                          res = gam_sal$residuals,
+                          fitted = gam_sal$fitted.values)
+ggplot(data = temp_gam_sal_ws, aes(x = ws, y = res)) + 
+  geom_point() + 
+  labs(x = "Actual Average Win Shares", y = "Salary GAM Residuals",
+       title = "Appropriate Valuations are Easier for Better Players") +
+  geom_hline(yintercept = 0, color = "red") +
+  xlim(0, 100)
+
+
+# summary(gam_sal)
+# summary(gam_ws)
+# gam.check(gam_sal)
+# plot(gam_sal)
+# plot(gam_ws)
+# plot.Gam(gam_sal, se = TRUE, col = "red")
 ```
 
 
+$$
+\begin{aligned}
+Salary \ Score_i &= \beta_0 + \beta_1f_1(APG_i) + \beta_2f_2(Games\ Played_i) + \beta_3f_3(PER_i) \\
+&+ \beta_4f_4(PPG_i) + \beta_5f_5(RPG_i) + \beta_6f_6(Career\ eFG_i) \\
+&+ \beta_7f_7(Draft \ Pick_i) + \beta_8I(Primary \ Position_i = PG) \\
+&+ \beta_9I(Primary \ Position_i = PF) + \beta_{10}I(Primary \ Position_i = SG) \\
+&+ \beta{11}I(Primary \ Position_i = SF) + \beta_{12}Number \ of \ Positions_i\\ 
+&+ \beta{13}Draft \ Year_i + \ \epsilon_i \\
+& for \ i = 1, \ 2, \ ... ,\ n \\ 
+\\
+\text{Each spline}& \ f_j\  \text{takes the following form for}\  \ j = 1, \ 2, \ ... \ , \ 7 \text{:}\\
+f_j(x_{ij}) &= b_0 + b_1(x_{ij}) + b_2(x_{ij}) + b3(x_{ij}) + \epsilon_{ij} \\
+\text{where we h} &\text{ave} \\ 
+b_1(x_{ij}) &= x_{ij} \\
+b_2(x_{ij}) &= (x_{ij} \ - \ \xi_2)_+ \\
+b_3(x_{ij}) &= (x_{ij} \ - \ \xi_3)_+ \\
+\text{and }\  \ \ \ \ \ \ \ \ \ \  & \\
+    (x_{ij} - \xi_k)_+ &= 
+\begin{cases}
+    x_{ij} - \xi_k& \text{if } x_{ij}\geq \xi_k\\
+    0              & \text{otherwise}
+\end{cases}
+\end{aligned} 
+$$
 
-
-
+$$
+\begin{aligned}
+Win \ Shares_i &= \beta_0 + \beta_1f_1(APG_i) + \beta_2f_2(Games\ Played_i) + \beta_3f_3(PER_i) \\
+&+ \beta_4f_4(PPG_i) + \beta_5f_5(RPG_i) + \beta_6f_6(Draft \ Pick_i) \\ 
+&+ \beta_7I(Primary \ Position_i = PG) + \beta_8I(Primary \ Position_i = PF) \\ &+\beta_9I(Primary \ Position_i = SG) + \beta{10}I(Primary \ Position_i = SF) \\ &+\beta_{11}Number \ of \ Positions_i + \beta{12}Draft \ Year_i + \ \epsilon_i \\
+& for \ i = 1, \ 2, \ ... ,\ n \\ 
+\\
+\text{Each spline}& \ f_j\  \text{takes the following form for}\  \ j = 1, \ 2, \ ... \ , \ 6 \text{:}\\
+f_j(x_{ij}) &= b_0 + b_1(x_{ij}) + b_2(x_{ij}) + b3(x_{ij}) + \epsilon_{ij} \\
+\text{where we h} &\text{ave} \\ 
+b_1(x_{ij}) &= x_{ij} \\
+b_2(x_{ij}) &= (x_{ij} \ - \ \xi_2)_+ \\
+b_3(x_{ij}) &= (x_{ij} \ - \ \xi_3)_+ \\
+\text{and }\  \ \ \ \ \ \ \ \ \ \  & \\
+    (x_{ij} - \xi_k)_+ &= 
+\begin{cases}
+    x_{ij} - \xi_k& \text{if } x_{ij}\geq \xi_k\\
+    0              & \text{otherwise}
+\end{cases}
+\end{aligned} 
+$$
 
 
 
